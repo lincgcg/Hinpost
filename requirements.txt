@@ -1,0 +1,8 @@
+torch==2.7.0
+numpy==2.2.6
+scapy==2.6.1
+scikit-learn==1.6.1
+six==1.17.0
+regex==2024.11.6
+tqdm==4.67.1
+packaging==25.0

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "name": "hinpost-bert",
+  "backbone": "configs/backbones/base_config.json",
+  "vocabulary": "models/encryptd_vocab.txt",
+  "data": {
+    "seed": 1,
+    "samples_per_class": 5000,
+    "min_packet_bytes": 32,
+    "field_init_rate": 50,
+    "field_shuffle_rate": 20
+  },
+  "training": {
+    "expert_num": 8,
+    "top_k": 4,
+    "seq_length": 128,
+    "batch_size": 32,
+    "learning_rate": 1e-05,
+    "warmup": 0.1,
+    "soft_alpha": 0.1,
+    "seeds": [
+      1,
+      2,
+      3
+    ]
+  },
+  "stages": [
+    {
+      "method": "field-init",
+      "epochs": 3,
+      "consistency_weight": 20
+    },
+    {
+      "method": "field-shuffle",
+      "epochs": 3,
+      "consistency_weight": 10
+    },
+    {
+      "method": "packet-shuffle",
+      "epochs": 3,
+      "consistency_weight": 20
+    },
+    {
+      "method": "ip",
+      "epochs": 1,
+      "consistency_weight": 0
+    }
+  ]
+}
